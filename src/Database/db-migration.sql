@@ -324,6 +324,16 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_currency_type
     CONSTRAINT hs_hr_currency_type_pkey PRIMARY KEY (currency_id)
 );
 
+CREATE TABLE IF NOT EXISTS public.hs_hr_custom_fields
+(
+    field_num bigint NOT NULL,
+    name character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    type integer NOT NULL,
+    screen character varying(100) COLLATE pg_catalog."default",
+    extra_data character varying(250) COLLATE pg_catalog."default",
+    CONSTRAINT hs_hr_custom_fields_pkey PRIMARY KEY (field_num)
+);
+
 CREATE TABLE IF NOT EXISTS public.hs_hr_education
 (
     edu_code character varying(13) COLLATE pg_catalog."default" NOT NULL,
@@ -1274,6 +1284,7 @@ CREATE TABLE IF NOT EXISTS public.user_role
     is_assignable smallint NOT NULL,
     is_predefined smallint NOT NULL,
     CONSTRAINT user_role_pkey PRIMARY KEY (id),
+    CONSTRAINT uq_user_role_name UNIQUE (name),
     CONSTRAINT user_role_name_key UNIQUE (name)
 );
 
@@ -1308,7 +1319,8 @@ CREATE TABLE IF NOT EXISTS public.user_selection_rule
     description character varying(255) COLLATE pg_catalog."default" NOT NULL,
     implementation_class character varying(255) COLLATE pg_catalog."default" NOT NULL,
     rule_xml_data text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT user_selection_rule_pkey PRIMARY KEY (id)
+    CONSTRAINT user_selection_rule_pkey PRIMARY KEY (id),
+    CONSTRAINT uq_user_selection_rule_name UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS public.user_user_role
@@ -1341,7 +1353,8 @@ CREATE TABLE IF NOT EXISTS public.work_shift
     id uuid NOT NULL,
     name text COLLATE pg_catalog."default" NOT NULL,
     hours_per_day numeric(4, 2) NOT NULL,
-    CONSTRAINT work_shift_pkey PRIMARY KEY (id)
+    CONSTRAINT work_shift_pkey PRIMARY KEY (id),
+    CONSTRAINT uq_work_shift_name UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS public.work_week
@@ -1366,12 +1379,353 @@ CREATE TABLE IF NOT EXISTS public.workflow_state_machine
     role character varying(255) COLLATE pg_catalog."default" NOT NULL,
     action character varying(255) COLLATE pg_catalog."default" NOT NULL,
     resulting_state character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT workflow_state_machine_pkey PRIMARY KEY (id)
+    CONSTRAINT workflow_state_machine_pkey PRIMARY KEY (id),
+    CONSTRAINT uq_workflow_state_machine UNIQUE (workflow, state, role, action, resulting_state)
 );
+
+ALTER TABLE IF EXISTS public.abstract_display_field
+    ADD CONSTRAINT fk_abstract_display_field_display_field_group_id FOREIGN KEY (display_field_group_id)
+    REFERENCES public.display_field_group (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
 
 ALTER TABLE IF EXISTS public.abstract_display_field
     ADD CONSTRAINT fk_abstract_display_field_report_group_id FOREIGN KEY (report_group_id)
     REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.attendance_record
+    ADD CONSTRAINT fk_attendance_record_employee_id FOREIGN KEY (employee_id)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.available_group_field
+    ADD CONSTRAINT fk_available_group_field_report_group_id FOREIGN KEY (report_group_id)
+    REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.composite_display_field
+    ADD CONSTRAINT fk_composite_display_field_display_field_group_id FOREIGN KEY (display_field_group_id)
+    REFERENCES public.display_field_group (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.composite_display_field
+    ADD CONSTRAINT fk_composite_display_field_report_group_id FOREIGN KEY (report_group_id)
+    REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.display_field
+    ADD CONSTRAINT fk_display_field_display_field_group_id FOREIGN KEY (display_field_group_id)
+    REFERENCES public.display_field_group (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.display_field
+    ADD CONSTRAINT fk_display_field_report_group_id FOREIGN KEY (report_group_id)
+    REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.display_field_group
+    ADD CONSTRAINT fk_display_field_group_report_group_id FOREIGN KEY (report_group_id)
+    REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.emp_education
+    ADD CONSTRAINT fk_emp_education_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.emp_license
+    ADD CONSTRAINT fk_emp_license_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.emp_termination
+    ADD CONSTRAINT fk_emp_termination_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.employee_work_shift
+    ADD CONSTRAINT fk_employee_work_shift_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.filter_field
+    ADD CONSTRAINT fk_filter_field_report_group_id FOREIGN KEY (report_group_id)
+    REFERENCES public.report_group (report_group_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_attachment
+    ADD CONSTRAINT fk_hs_hr_emp_attachment_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_children
+    ADD CONSTRAINT fk_hs_hr_emp_children_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_contract_extend
+    ADD CONSTRAINT fk_hs_hr_emp_contract_extend_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_dependents
+    ADD CONSTRAINT fk_hs_hr_emp_dependents_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_directdebit
+    ADD CONSTRAINT fk_hs_hr_emp_directdebit_salary_id FOREIGN KEY (salary_id)
+    REFERENCES public.hs_hr_emp_basicsalary (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_emergency_contacts
+    ADD CONSTRAINT fk_hs_hr_emp_emergency_contacts_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_jobtitle_history
+    ADD CONSTRAINT fk_hs_hr_emp_jobtitle_history_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_language
+    ADD CONSTRAINT fk_hs_hr_emp_language_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_location_history
+    ADD CONSTRAINT fk_hs_hr_emp_location_history_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_locations
+    ADD CONSTRAINT fk_hs_hr_emp_locations_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_member_detail
+    ADD CONSTRAINT fk_hs_hr_emp_member_detail_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_passport
+    ADD CONSTRAINT fk_hs_hr_emp_passport_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_picture
+    ADD CONSTRAINT fk_hs_hr_emp_picture_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+CREATE INDEX IF NOT EXISTS hs_hr_emp_picture_pkey
+    ON public.hs_hr_emp_picture(emp_number);
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_skill
+    ADD CONSTRAINT fk_hs_hr_emp_skill_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_subdivision_history
+    ADD CONSTRAINT fk_hs_hr_emp_subdivision_history_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_us_tax
+    ADD CONSTRAINT fk_hs_hr_emp_us_tax_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+CREATE INDEX IF NOT EXISTS hs_hr_emp_us_tax_pkey
+    ON public.hs_hr_emp_us_tax(emp_number);
+
+
+ALTER TABLE IF EXISTS public.hs_hr_emp_work_experience
+    ADD CONSTRAINT fk_hs_hr_emp_work_experience_emp_number FOREIGN KEY (emp_number)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.hs_hr_employee_leave_quota
+    ADD CONSTRAINT fk_hs_hr_employee_leave_quota_employee_id FOREIGN KEY (employee_id)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_attachment
+    ADD CONSTRAINT fk_job_candidate_attachment_candidate_id FOREIGN KEY (candidate_id)
+    REFERENCES public.job_candidate (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_history
+    ADD CONSTRAINT fk_job_candidate_history_candidate_id FOREIGN KEY (candidate_id)
+    REFERENCES public.job_candidate (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_history
+    ADD CONSTRAINT fk_job_candidate_history_interview_id FOREIGN KEY (interview_id)
+    REFERENCES public.job_interview (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_history
+    ADD CONSTRAINT fk_job_candidate_history_vacancy_id FOREIGN KEY (vacancy_id)
+    REFERENCES public.job_vacancy (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_vacancy
+    ADD CONSTRAINT fk_job_candidate_vacancy_candidate_id FOREIGN KEY (candidate_id)
+    REFERENCES public.job_candidate (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.job_candidate_vacancy
+    ADD CONSTRAINT fk_job_candidate_vacancy_vacancy_id FOREIGN KEY (vacancy_id)
+    REFERENCES public.job_vacancy (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet
+    ADD CONSTRAINT fk_timesheet_employee_id FOREIGN KEY (employee_id)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet_action_log
+    ADD CONSTRAINT fk_timesheet_action_log_timesheet_id FOREIGN KEY (timesheet_id)
+    REFERENCES public.timesheet (timesheet_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet_item
+    ADD CONSTRAINT fk_timesheet_item_activity_id FOREIGN KEY (activity_id)
+    REFERENCES public.project_activity (activity_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet_item
+    ADD CONSTRAINT fk_timesheet_item_employee_id FOREIGN KEY (employee_id)
+    REFERENCES public.hs_hr_employee (emp_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet_item
+    ADD CONSTRAINT fk_timesheet_item_project_id FOREIGN KEY (project_id)
+    REFERENCES public.project (project_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.timesheet_item
+    ADD CONSTRAINT fk_timesheet_item_timesheet_id FOREIGN KEY (timesheet_id)
+    REFERENCES public.timesheet (timesheet_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.user_role_data_group
+    ADD CONSTRAINT fk_user_role_data_group_data_group_id FOREIGN KEY (data_group_id)
+    REFERENCES public.data_group (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.user_role_data_group
+    ADD CONSTRAINT fk_user_role_data_group_user_role_id FOREIGN KEY (user_role_id)
+    REFERENCES public.user_role (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.user_user_role
+    ADD CONSTRAINT fk_user_user_role_user_id FOREIGN KEY (user_id)
+    REFERENCES public.users (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.user_user_role
+    ADD CONSTRAINT fk_user_user_role_user_role_id FOREIGN KEY (user_role_id)
+    REFERENCES public.user_role (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.work_week
+    ADD CONSTRAINT fk_work_week_operational_country_id FOREIGN KEY (operational_country_id)
+    REFERENCES public.operational_country (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION;
 

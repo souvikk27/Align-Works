@@ -1,0 +1,78 @@
+-- Foreign keys for table `hs_hr_geninfo`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_comp_property`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_config`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_country`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_currency_type`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_custom_fields`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `customer`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `data_group`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_kpi`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `education`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `email_configuration`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `email_notification`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `email_subscriber`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_emp_basicsalary`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `hs_hr_employee`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `employment_status`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `group_field`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `holiday`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `job_candidate`
+-- No foreign keys defined in the provided schema.
+
+-- Foreign keys for table `job_category`
+-- No foreign keys defined in the provided schema.
+
+
+-- Altering table 'hs_hr_unique_id'
+ALTER TABLE hs_hr_unique_id
+ADD CONSTRAINT FK_hs_hr_unique_id_table_name FOREIGN KEY (table_name) REFERENCES screen(name);
+
+
+
+-- Altering table 'role_user_selection_rule'
+ALTER TABLE role_user_selection_rule
+ADD CONSTRAINT FK_role_user_selection_rule_user_role_id FOREIGN KEY (user_role_id) REFERENCES user_role(id);
+
+
+
+
+
+
+
+
