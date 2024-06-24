@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS public.email_subscriber
 CREATE TABLE IF NOT EXISTS public.emp_education
 (
     id uuid NOT NULL,
-    emp_number integer,
+    emp_number uuid,
     education_id uuid,
     institute character varying(100) COLLATE pg_catalog."default",
     major character varying(100) COLLATE pg_catalog."default",
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS public.emp_education
 
 CREATE TABLE IF NOT EXISTS public.emp_license
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     license_id uuid NOT NULL,
     license_no character varying(50) COLLATE pg_catalog."default",
     license_issued_date date,
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS public.emp_reporting_method
 CREATE TABLE IF NOT EXISTS public.emp_termination
 (
     id uuid NOT NULL,
-    emp_number integer,
+    emp_number uuid,
     reason_id uuid,
     termination_date date,
     note character varying(255) COLLATE pg_catalog."default",
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS public.emp_termination_reason
 CREATE TABLE IF NOT EXISTS public.employee_work_shift
 (
     work_shift_id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     CONSTRAINT employee_work_shift_pkey PRIMARY KEY (work_shift_id, emp_number)
 );
 
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_attach_type
 CREATE TABLE IF NOT EXISTS public.hs_hr_attachment
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     category_id uuid NOT NULL,
     group_id uuid NOT NULL,
     type_id uuid NOT NULL,
@@ -335,7 +335,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_education
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_attachment
 (
     attach_id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     attach_name character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
     attach_description character varying(200) COLLATE pg_catalog."default",
     attach_filename character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_attachment
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_basicsalary
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     sal_grd_code character varying(13) COLLATE pg_catalog."default",
     currency_id character varying(6) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
     ebsal_basic_salary character varying(100) COLLATE pg_catalog."default",
@@ -361,7 +361,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_basicsalary
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_children
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     ec_seqno numeric(2, 2) NOT NULL,
     ec_name character varying(100) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
     ec_date_of_birth date,
@@ -370,7 +370,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_children
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_contract_extend
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     econ_extend_id numeric(10, 2) NOT NULL,
     econ_extend_start_date timestamp without time zone,
     econ_extend_end_date timestamp without time zone,
@@ -379,7 +379,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_contract_extend
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_dependents
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     ed_seqno numeric(2, 0) NOT NULL,
     ed_name character varying(100) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
     ed_relationship_type character varying(10) COLLATE pg_catalog."default",
@@ -402,7 +402,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_directdebit
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_education
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(13) COLLATE pg_catalog."default" NOT NULL,
     institute character varying(200) COLLATE pg_catalog."default",
     major character varying(100) COLLATE pg_catalog."default",
@@ -415,7 +415,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_education
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_emergency_contacts
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     eec_seqno numeric(2, 2) NOT NULL,
     eec_name character varying(100) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
     eec_relationship character varying(100) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
@@ -428,7 +428,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_emergency_contacts
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_jobtitle_history
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(15) COLLATE pg_catalog."default" NOT NULL,
     name character varying(250) COLLATE pg_catalog."default",
     start_date timestamp without time zone,
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_jobtitle_history
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_language
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(10) COLLATE pg_catalog."default" NOT NULL,
     fluency_code character(1) COLLATE pg_catalog."default",
     competency_code character(1) COLLATE pg_catalog."default",
@@ -449,7 +449,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_language
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_location_history
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(15) COLLATE pg_catalog."default" NOT NULL,
     name character varying(250) COLLATE pg_catalog."default",
     start_date timestamp without time zone,
@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_locations
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_member_detail
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     membship_code character varying(13) COLLATE pg_catalog."default" NOT NULL,
     mship_type_code character varying(13) COLLATE pg_catalog."default",
     ememb_subscript_amount numeric(10, 2),
@@ -478,7 +478,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_member_detail
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_passport
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     ep_seqno numeric(2, 2) NOT NULL,
     ep_passport_type character varying(2) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
     ep_passport_num character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
@@ -493,7 +493,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_passport
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_picture
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     epic_picture bytea,
     epic_filename character varying(100) COLLATE pg_catalog."default",
     epic_type character varying(50) COLLATE pg_catalog."default",
@@ -505,15 +505,15 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_picture
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_reporting
 (
-    erep_sup_emp_number integer NOT NULL,
-    erep_sub_emp_number integer NOT NULL,
+    erep_sup_emp_number uuid NOT NULL,
+    erep_sub_emp_number uuid NOT NULL,
     erep_reporting_mode character varying(10) COLLATE pg_catalog."default",
     CONSTRAINT hs_hr_emp_reporting_pkey PRIMARY KEY (erep_sup_emp_number, erep_sub_emp_number)
 );
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_skill
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(3) COLLATE pg_catalog."default" NOT NULL,
     years_of_exp integer,
     comments text COLLATE pg_catalog."default",
@@ -530,7 +530,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_status
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_subdivision_history
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     code character varying(15) COLLATE pg_catalog."default" NOT NULL,
     name character varying(250) COLLATE pg_catalog."default",
     start_date timestamp without time zone,
@@ -540,14 +540,14 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_subdivision_history
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_subscribe
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     frequency integer NOT NULL,
     CONSTRAINT hs_hr_emp_subscribe_pkey PRIMARY KEY (emp_number, frequency)
 );
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_us_tax
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     tax_federal_status character varying(30) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
     tax_federal_exceptions integer DEFAULT 0,
     tax_state character varying(30) COLLATE pg_catalog."default" DEFAULT NULL::character varying,
@@ -561,7 +561,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_us_tax
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_visa_history
 (
     id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     evh_type character varying(10) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
     evh_number character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
     evh_issue_date date,
@@ -572,7 +572,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_visa_history
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_emp_work_experience
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     eexp_seqno numeric(10, 2) NOT NULL,
     eexp_employer character varying(100) COLLATE pg_catalog."default",
     eexp_jobtit character varying(120) COLLATE pg_catalog."default",
@@ -585,7 +585,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_emp_work_experience
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_employee
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     employee_id character varying(20) COLLATE pg_catalog."default",
     emp_lastname character varying(100) COLLATE pg_catalog."default",
     emp_firstname character varying(100) COLLATE pg_catalog."default",
@@ -623,7 +623,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_employee
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_employee_leave_entitlement
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     leave_type_id character varying(13) COLLATE pg_catalog."default" NOT NULL,
     no_of_days numeric(6, 2) NOT NULL DEFAULT 0.00,
     days_used numeric(6, 2) NOT NULL DEFAULT 0.00,
@@ -645,7 +645,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_employee_leave_quota
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_employee_subscription
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     notification_type character varying(50) COLLATE pg_catalog."default" NOT NULL DEFAULT '0'::character varying,
     subscription_id uuid,
     CONSTRAINT hs_hr_employee_subscription_pkey PRIMARY KEY (emp_number, notification_type)
@@ -653,7 +653,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_employee_subscription
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_employee_training
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     training_id uuid NOT NULL,
     training_subject character varying(100) COLLATE pg_catalog."default",
     training_topic character varying(100) COLLATE pg_catalog."default",
@@ -663,7 +663,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_employee_training
 
 CREATE TABLE IF NOT EXISTS public.hs_hr_employee_wage_list
 (
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     wage character varying(250) COLLATE pg_catalog."default" NOT NULL DEFAULT '0'::character varying,
     CONSTRAINT hs_hr_employee_wage_list_pkey PRIMARY KEY (emp_number, wage)
 );
@@ -738,7 +738,7 @@ CREATE TABLE IF NOT EXISTS public.hs_hr_leave_group
 CREATE TABLE IF NOT EXISTS public.hs_hr_leave_group_employee
 (
     leave_group_id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     CONSTRAINT hs_hr_leave_group_employee_pkey PRIMARY KEY (leave_group_id, emp_number)
 );
 
@@ -1117,7 +1117,7 @@ CREATE TABLE IF NOT EXISTS public.project_activity
 CREATE TABLE IF NOT EXISTS public.project_admin
 (
     project_id uuid NOT NULL,
-    emp_number integer NOT NULL,
+    emp_number uuid NOT NULL,
     CONSTRAINT project_admin_pkey PRIMARY KEY (project_id, emp_number)
 );
 
