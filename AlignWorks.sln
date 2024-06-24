@@ -6,14 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{552A18A5-AB4D-48EC-A6EE-59110593BDFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B87B08C3-19EE-4F46-BEE1-F7FAB58CD044}"
-	ProjectSection(SolutionItems) = preProject
-		src\Api\api project.txt = src\Api\api project.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}"
-	ProjectSection(SolutionItems) = preProject
-		src\BuildingBlocks\shared project.txt = src\BuildingBlocks\shared project.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9936529A-CAC5-4F32-87F8-E5B7BBF6414F}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,10 +29,42 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{76D72863
 		tests\test scripts.txt = tests\test scripts.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignWorks.BuildingBlocks.Domain", "src\BuildingBlocks\AlignWorks.BuildingBlocks.Domain\AlignWorks.BuildingBlocks.Domain.csproj", "{9DCF514B-552C-4B2F-A27A-CF04136CBC33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignWorks.BuildingBlocks.Application", "src\BuildingBlocks\AlignWorks.BuildingBlocks.Application\AlignWorks.BuildingBlocks.Application.csproj", "{90124A46-D2A9-4B3B-B126-53DA8270B55A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignWorks.BuildingBlocks.Infrastructure", "src\BuildingBlocks\AlignWorks.BuildingBlocks.Infrastructure\AlignWorks.BuildingBlocks.Infrastructure.csproj", "{B05FB893-BF15-4730-A3ED-550E81E6AC85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignWorks.BuildingBlocks.EventBus", "src\BuildingBlocks\AlignWorks.BuildingBlocks.EventBus\AlignWorks.BuildingBlocks.EventBus.csproj", "{49277FB6-41F8-48A5-B360-1E60AD2AB37C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignWorks.API", "src\Api\AlignWorks.API\AlignWorks.API.csproj", "{2A736A88-47AF-4816-85EE-DA59910EDD33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DCF514B-552C-4B2F-A27A-CF04136CBC33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DCF514B-552C-4B2F-A27A-CF04136CBC33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCF514B-552C-4B2F-A27A-CF04136CBC33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DCF514B-552C-4B2F-A27A-CF04136CBC33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90124A46-D2A9-4B3B-B126-53DA8270B55A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90124A46-D2A9-4B3B-B126-53DA8270B55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90124A46-D2A9-4B3B-B126-53DA8270B55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90124A46-D2A9-4B3B-B126-53DA8270B55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B05FB893-BF15-4730-A3ED-550E81E6AC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05FB893-BF15-4730-A3ED-550E81E6AC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05FB893-BF15-4730-A3ED-550E81E6AC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05FB893-BF15-4730-A3ED-550E81E6AC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49277FB6-41F8-48A5-B360-1E60AD2AB37C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49277FB6-41F8-48A5-B360-1E60AD2AB37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49277FB6-41F8-48A5-B360-1E60AD2AB37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49277FB6-41F8-48A5-B360-1E60AD2AB37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A736A88-47AF-4816-85EE-DA59910EDD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A736A88-47AF-4816-85EE-DA59910EDD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A736A88-47AF-4816-85EE-DA59910EDD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A736A88-47AF-4816-85EE-DA59910EDD33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +74,11 @@ Global
 		{C0FD21DA-FEB2-4352-B65E-D0FA861F2F30} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
 		{9936529A-CAC5-4F32-87F8-E5B7BBF6414F} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
 		{BE4C65A9-5159-4EEC-A847-514F64088BD7} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
+		{9DCF514B-552C-4B2F-A27A-CF04136CBC33} = {C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}
+		{90124A46-D2A9-4B3B-B126-53DA8270B55A} = {C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}
+		{B05FB893-BF15-4730-A3ED-550E81E6AC85} = {C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}
+		{49277FB6-41F8-48A5-B360-1E60AD2AB37C} = {C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}
+		{2A736A88-47AF-4816-85EE-DA59910EDD33} = {B87B08C3-19EE-4F46-BEE1-F7FAB58CD044}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FAEB35D9-A286-4B07-B22A-D42E203A2029}

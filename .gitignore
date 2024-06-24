@@ -3,3 +3,13 @@
 ################################################################################
 
 /.vs/AlignWorks
+/src/Api/AlignWorks.API/bin/Debug/net8.0
+/src/Api/AlignWorks.API/obj
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Application/bin/Debug/net8.0
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Application/obj
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Domain/obj
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Domain/bin/Debug/net8.0
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.EventBus/bin/Debug/net8.0
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.EventBus/obj
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Infrastructure/bin/Debug/net8.0
+/src/BuildingBlocks/AlignWorks.BuildingBlocks.Infrastructure/obj
