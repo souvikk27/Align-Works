@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{552A18A5-AB4D-48EC-A6EE-59110593BDFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B87B08C3-19EE-4F46-BEE1-F7FAB58CD044}"
+	ProjectSection(SolutionItems) = preProject
+		src\Api\api project.txt = src\Api\api project.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{C0FD21DA-FEB2-4352-B65E-D0FA861F2F30}"
+	ProjectSection(SolutionItems) = preProject
+		src\BuildingBlocks\shared project.txt = src\BuildingBlocks\shared project.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9936529A-CAC5-4F32-87F8-E5B7BBF6414F}"
+	ProjectSection(SolutionItems) = preProject
+		src\Database\database project.txt = src\Database\database project.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{BE4C65A9-5159-4EEC-A847-514F64088BD7}"
+	ProjectSection(SolutionItems) = preProject
+		src\Modules\modules.txt = src\Modules\modules.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02ECE9C2-DD6E-4244-8A40-E7A000559F7D}"
+	ProjectSection(SolutionItems) = preProject
+		build\build scripts.txt = build\build scripts.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{76D72863-D99A-46B8-8234-5E085C541987}"
+	ProjectSection(SolutionItems) = preProject
+		tests\test scripts.txt = tests\test scripts.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B87B08C3-19EE-4F46-BEE1-F7FAB58CD044} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
+		{C0FD21DA-FEB2-4352-B65E-D0FA861F2F30} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
+		{9936529A-CAC5-4F32-87F8-E5B7BBF6414F} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
+		{BE4C65A9-5159-4EEC-A847-514F64088BD7} = {552A18A5-AB4D-48EC-A6EE-59110593BDFC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAEB35D9-A286-4B07-B22A-D42E203A2029}
+	EndGlobalSection
+EndGlobal
