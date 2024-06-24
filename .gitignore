@@ -13,3 +13,5 @@
 /src/BuildingBlocks/AlignWorks.BuildingBlocks.EventBus/obj
 /src/BuildingBlocks/AlignWorks.BuildingBlocks.Infrastructure/bin/Debug/net8.0
 /src/BuildingBlocks/AlignWorks.BuildingBlocks.Infrastructure/obj
+/src/Database/DbMigrator/obj
+/src/Database/DbMigrator/bin/Debug/net8.0
