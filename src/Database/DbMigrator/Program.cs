@@ -7,14 +7,16 @@ namespace DbMigrator
     {
         private static void Main(string[] args)
         {
-            string serverConnString = "Host=localhost;Username=postgres;Password=Sou@2345";
-            string dbName = "alignworks";
-            string scriptPath = "";
-
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
+
+            string? serverConnString = config.GetConnectionString("SqlConnection");
+            string? dbName = config.GetSection("Settings")["DbName"];
+            string? dbUser = config.GetSection("Settings")["DbUser"];
+            string? dbPassword = config.GetSection("Settings")["DbPassword"];
+            string scriptPath = "";
 
             try
             {
@@ -29,7 +31,7 @@ namespace DbMigrator
                         cmd.ExecuteNonQuery();
                     }
 
-                    string dbConnString = $"Host=localhost;Username=postgres;Password=Sou@2345;Database={dbName}";
+                    string dbConnString = $"Host=localhost;Username={dbUser};Password={dbPassword};Database={dbName}";
                     using (var dbConn = new NpgsqlConnection(dbConnString))
                     {
                         dbConn.Open();
