@@ -15,3 +15,4 @@
 /src/BuildingBlocks/AlignWorks.BuildingBlocks.Infrastructure/obj
 /src/Database/DbMigrator/obj
 /src/Database/DbMigrator/bin/Debug/net8.0
+/.vs/ProjectEvaluation
